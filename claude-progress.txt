@@ -1,0 +1,19 @@
+=== MedinovAI Harness 2.1 — Progress Log ===
+Repo: medinovai-evidence-store
+Tier: 1 (FDA 21 CFR Part 11 — full harness)
+Initialized: 2026-03-30
+Model: scaffold-session
+
+--- SESSION 0 (Initializer) ---
+Status: COMPLETE
+Actions:
+  - CLAUDE.md written (Section 9 Tier 1 annotations)
+  - init.sh, Docker + Temporal scaffold, src/ packages (workflows, api, compliance, lineage)
+  - feature_list.json written (65 features, all passes:false)
+  - AUDIT_TRAIL.md initialized (21 CFR Part 11 format)
+  - .claude/settings.json + commands/
+Next Session Should:
+  - Run bash init.sh
+  - Pick highest-priority failing feature from feature_list.json
+  - Implement ONE feature; wire persistence or real Temporal activities as needed
+  - Append AUDIT_TRAIL.md; set passes:true only after E2E verification

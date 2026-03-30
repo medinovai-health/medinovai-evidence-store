@@ -1,0 +1,38 @@
+{
+  "model": "claude-opus-4-6",
+  "permissions": {
+    "allow": [
+      "Read(*)",
+      "Write(src/**)",
+      "Write(tests/**)",
+      "Write(config/**)",
+      "Write(temporal/**)",
+      "Write(schemas/**)",
+      "Write(*.md)",
+      "Write(*.json)",
+      "Write(*.yaml)",
+      "Write(*.yml)",
+      "Write(.env.example)",
+      "Write(Dockerfile)",
+      "Write(docker-compose.yml)",
+      "Write(init.sh)",
+      "Write(requirements.txt)",
+      "Write(pyproject.toml)",
+      "Bash(bash init.sh)",
+      "Bash(python3 *)",
+      "Bash(pytest *)",
+      "Bash(pip *)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(git push --force)",
+      "Bash(git push -f *)",
+      "Bash(curl *secrets*)",
+      "Write(.env)",
+      "Write(**/.env)",
+      "Write(**/*credentials*)",
+      "Bash(docker system prune*)",
+      "Bash(docker volume rm *)"
+    ]
+  }
+}

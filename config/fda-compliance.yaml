@@ -1,0 +1,65 @@
+# FDA 21 CFR Part 11 — Evidence Store policy (reference; load at runtime)
+version: "0.1.0"
+namespace_default: "medinovai-evidence"
+
+electronic_signature:
+  required_fields:
+    - signer_id
+    - signer_name
+    - timestamp
+    - meaning
+    - method
+    - intent_statement
+  allowed_meanings:
+    - authorship
+    - review
+    - approval
+    - responsibility
+  allowed_methods:
+    - password
+    - biometric
+    - two_factor
+
+audit_trail:
+  retention_days_min: 2555
+  categories:
+    - STUDY_LIFECYCLE
+    - ARTIFACT_MUTATION
+    - SIGNATURE
+    - ACCESS_CONTROL
+  phi_safe_only: true
+
+data_integrity:
+  default_hash_algorithm: "SHA-256"
+  record_versioning: required
+
+record_retention:
+  policies:
+    clinical_trial_25y:
+      years: 25
+      worm_on_archive: true
+    research_7y:
+      years: 7
+      worm_on_archive: false
+    operational_3y:
+      years: 3
+      worm_on_archive: false
+
+temporal:
+  task_queue: "evidence-store-tasks"
+  activity_timeouts_seconds:
+    create_study: 30
+    approve_protocol: 60
+    collect_data: 300
+    run_analysis: 3600
+    generate_report: 120
+    archive_study: 60
+
+study_lifecycle:
+  transitions_requiring_signature:
+    - after_study_creation
+    - after_protocol_approval
+    - after_data_collection
+    - after_analysis
+    - after_report_generation
+    - before_archive

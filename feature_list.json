@@ -1,0 +1,926 @@
+{
+  "repo": "medinovai-evidence-store",
+  "tier": 1,
+  "generated": "2026-03-30T17:10:12Z",
+  "features": [
+    {
+      "id": "F001",
+      "category": "functional",
+      "description": "Temporal worker registers study_lifecycle workflow and activity set",
+      "regulatory": [
+        "IEC62304",
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F002",
+      "category": "functional",
+      "description": "Study lifecycle: create study record and enter CREATED state",
+      "regulatory": [
+        "21CFR11",
+        "GDPR"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F003",
+      "category": "functional",
+      "description": "Study lifecycle: transition CREATED\u2192PROTOCOL_PENDING with audit event",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F004",
+      "category": "functional",
+      "description": "Study lifecycle: protocol approval gate blocks until e-signature",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F005",
+      "category": "functional",
+      "description": "Study lifecycle: PROTOCOL_APPROVED\u2192DATA_COLLECTION with signed transition",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F006",
+      "category": "functional",
+      "description": "Study lifecycle: data collection activities complete and checkpoint audit",
+      "regulatory": [
+        "HIPAA",
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F007",
+      "category": "functional",
+      "description": "Study lifecycle: DATA_COLLECTION\u2192ANALYSIS requires e-signature",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F008",
+      "category": "functional",
+      "description": "Study lifecycle: analysis execution activity with heartbeat",
+      "regulatory": [
+        "IEC62304"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F009",
+      "category": "functional",
+      "description": "Study lifecycle: ANALYSIS\u2192REPORT_GENERATION signed transition",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F010",
+      "category": "functional",
+      "description": "Study lifecycle: report generation produces versioned artifact record",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F011",
+      "category": "functional",
+      "description": "Study lifecycle: REPORT\u2192ARCHIVE with retention policy applied",
+      "regulatory": [
+        "21CFR11",
+        "GDPR"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F012",
+      "category": "functional",
+      "description": "Temporal signal: submit_protocol_signature completes approval step",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F013",
+      "category": "functional",
+      "description": "Temporal signal: submit_transition_signature for each lifecycle edge",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F014",
+      "category": "functional",
+      "description": "Workflow query returns current study phase and pending signature types",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F015",
+      "category": "functional",
+      "description": "Compensation: failed analysis triggers cleanup activity and audit",
+      "regulatory": [
+        "IEC62304"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F016",
+      "category": "performance",
+      "description": "Activity timeouts aligned with config/fda-compliance.yaml",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F017",
+      "category": "security",
+      "description": "Task queue name from env; no default cross-tenant queue sharing",
+      "regulatory": [
+        "HIPAA"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F018",
+      "category": "compliance",
+      "description": "Workflow history retention hooks documented for Temporal namespace",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F019",
+      "category": "compliance",
+      "description": "electronic_signature: capture identity, intent, timestamp, meaning",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F020",
+      "category": "compliance",
+      "description": "electronic_signature: verify method password|two_factor|biometric stub",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F021",
+      "category": "compliance",
+      "description": "electronic_signature: bind signature payload to record checksum",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F022",
+      "category": "compliance",
+      "description": "audit_trail: append-only in-memory sink with structured schema",
+      "regulatory": [
+        "21CFR11",
+        "HIPAA"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F023",
+      "category": "compliance",
+      "description": "audit_trail: export API returns filtered trail by study_id",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F024",
+      "category": "compliance",
+      "description": "data_integrity: SHA-256 checksum for artifact bytes",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F025",
+      "category": "compliance",
+      "description": "data_integrity: version increment on artifact update",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F026",
+      "category": "compliance",
+      "description": "fda_records: retention policy clinical_trial_25y applied on archive",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F027",
+      "category": "compliance",
+      "description": "fda_records: legal hold flag prevents delete in store",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F028",
+      "category": "security",
+      "description": "All audit log entries include correlation_id and tenant_id fields",
+      "regulatory": [
+        "HIPAA"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F029",
+      "category": "compliance",
+      "description": "Signature meaning enum matches Part 11 manifestations",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F030",
+      "category": "compliance",
+      "description": "AUDIT_TRAIL.md session append procedure documented and tested",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F031",
+      "category": "functional",
+      "description": "sigure_tasks activities invoke compliance signature validation",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F032",
+      "category": "functional",
+      "description": "activities.py implements create_study stub with structured log",
+      "regulatory": [
+        "IEC62304"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F033",
+      "category": "functional",
+      "description": "activities.py implements collect_artifacts with hash activity",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F034",
+      "category": "functional",
+      "description": "activities.py implements archive_study stub",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F035",
+      "category": "performance",
+      "description": "Batch checksum computation for large artifacts (streaming)",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F036",
+      "category": "functional",
+      "description": "provenance_graph: register node per artifact version",
+      "regulatory": [
+        "IEC62304"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F037",
+      "category": "functional",
+      "description": "provenance_graph: directed edges parent\u2192child derivation",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F038",
+      "category": "functional",
+      "description": "provenance_graph: query ancestors for reproducibility",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F039",
+      "category": "functional",
+      "description": "artifact_store: put/get metadata with version",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F040",
+      "category": "functional",
+      "description": "artifact_store: list versions by artifact logical id",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F041",
+      "category": "functional",
+      "description": "reproducibility_bundle: export manifest with hashes and workflow ids",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F042",
+      "category": "functional",
+      "description": "reproducibility_bundle: include Temporal run id in bundle",
+      "regulatory": [
+        "IEC62304"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F043",
+      "category": "security",
+      "description": "Lineage APIs enforce tenant_id on all queries",
+      "regulatory": [
+        "HIPAA",
+        "GDPR"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F044",
+      "category": "functional",
+      "description": "JSON schema validate artifact against schemas/artifact.json",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F045",
+      "category": "performance",
+      "description": "Graph export completes under SLA for N<1000 nodes (benchmark)",
+      "regulatory": [
+        "IEC62304"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F046",
+      "category": "compliance",
+      "description": "WORM lock flag honored in artifact metadata path",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F047",
+      "category": "functional",
+      "description": "Tool and parameters stored on lineage edge for reproducibility",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F048",
+      "category": "functional",
+      "description": "Signed report artifact links to signing event id",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F049",
+      "category": "functional",
+      "description": "GET /health returns service identity and build version",
+      "regulatory": [
+        "IEC62304"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F050",
+      "category": "functional",
+      "description": "GET /ready checks Temporal connectivity (soft fail ok in dev)",
+      "regulatory": [
+        "IEC62304"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F051",
+      "category": "functional",
+      "description": "POST /api/v1/studies creates study stub",
+      "regulatory": [
+        "GDPR",
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F052",
+      "category": "functional",
+      "description": "GET /api/v1/studies/{id} returns study state",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F053",
+      "category": "functional",
+      "description": "POST /api/v1/artifacts registers artifact metadata",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F054",
+      "category": "functional",
+      "description": "GET /api/v1/artifacts/{id}/versions lists versions",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F055",
+      "category": "functional",
+      "description": "POST /api/v1/signatures submits e-signature request stub",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F056",
+      "category": "functional",
+      "description": "GET /api/v1/audit/studies/{id} returns audit entries",
+      "regulatory": [
+        "21CFR11",
+        "HIPAA"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F057",
+      "category": "security",
+      "description": "API rejects missing tenant header in production mode flag",
+      "regulatory": [
+        "HIPAA"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F058",
+      "category": "performance",
+      "description": "OpenAPI spec loads in <200ms cold start (dev)",
+      "regulatory": [
+        "IEC62304"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F059",
+      "category": "functional",
+      "description": "docker-compose brings up Temporal UI on published port",
+      "regulatory": [
+        "IEC62304"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F060",
+      "category": "functional",
+      "description": "Evidence Store container builds and serves /health",
+      "regulatory": [
+        "IEC62304"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F061",
+      "category": "security",
+      "description": "No secrets in compose defaults; .env.example documents placeholders",
+      "regulatory": [
+        "HIPAA"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F062",
+      "category": "compliance",
+      "description": "config/fda-compliance.yaml loaded at startup for signature policy",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F063",
+      "category": "functional",
+      "description": "init.sh creates venv, installs deps, optional compose up",
+      "regulatory": [
+        "IEC62304"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F064",
+      "category": "functional",
+      "description": "temporal/ dynamic config file present and mounted",
+      "regulatory": [
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F065",
+      "category": "compliance",
+      "description": "Feature traceability: each merged PR references feature id in commit",
+      "regulatory": [
+        "IEC62304",
+        "21CFR11"
+      ],
+      "steps": [
+        "Verify acceptance criteria in description",
+        "Run automated tests",
+        "Append AUDIT_TRAIL.md"
+      ],
+      "passes": false
+    }
+  ]
+}

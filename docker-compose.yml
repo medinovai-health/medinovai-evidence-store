@@ -1,0 +1,78 @@
+# Local Temporal + Evidence Store API (backup compose files per org policy)
+services:
+  postgresql:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_PASSWORD: temporal
+      POSTGRES_USER: temporal
+    ports:
+      - "5432:5432"
+    volumes:
+      - temporal_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U temporal"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  temporal:
+    image: temporalio/auto-setup:1.25.2
+    depends_on:
+      postgresql:
+        condition: service_healthy
+    environment:
+      - DB=postgres12
+      - DB_PORT=5432
+      - POSTGRES_USER=temporal
+      - POSTGRES_PWD=temporal
+      - POSTGRES_SEEDS=postgresql
+    ports:
+      - "7233:7233"
+
+  temporal-ui:
+    image: temporalio/ui:2.34.0
+    depends_on:
+      - temporal
+    environment:
+      - TEMPORAL_ADDRESS=temporal:7233
+      - TEMPORAL_CORS_ORIGINS=http://localhost:3000
+    ports:
+      - "8088:8080"
+
+  evidence-store:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - temporal
+    environment:
+      - MOS_SERVICE_NAME=medinovai-evidence-store
+      - MOS_TEMPORAL_ADDRESS=temporal:7233
+      - MOS_TEMPORAL_NAMESPACE=default
+      - MOS_TASK_QUEUE=evidence-store-tasks
+      - MOS_API_HOST=0.0.0.0
+      - MOS_API_PORT=8000
+      - MOS_FDA_CONFIG_PATH=/app/config/fda-compliance.yaml
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./config:/app/config:ro
+
+  evidence-store-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - temporal
+    command: ["python", "-m", "src.worker"]
+    environment:
+      - MOS_SERVICE_NAME=medinovai-evidence-store
+      - MOS_TEMPORAL_ADDRESS=temporal:7233
+      - MOS_TEMPORAL_NAMESPACE=default
+      - MOS_TASK_QUEUE=evidence-store-tasks
+      - MOS_FDA_CONFIG_PATH=/app/config/fda-compliance.yaml
+    volumes:
+      - ./config:/app/config:ro
+
+volumes:
+  temporal_pg:

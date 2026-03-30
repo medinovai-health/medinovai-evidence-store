@@ -1,0 +1,7 @@
+# Temporal dynamic configuration (development defaults)
+# Mount into temporal container: see docker-compose volumes
+system.forceSearchAttributesCacheRefreshOnRead:
+  - value: true
+limit.maxIDLength:
+  - value: 1000
+  - constraints: {}

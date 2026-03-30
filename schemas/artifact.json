@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MedinovAI Evidence Store Artifact",
+  "type": "object",
+  "required": ["artifact_id", "study_id", "type", "hash", "created_at", "created_by"],
+  "properties": {
+    "artifact_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique artifact identifier"
+    },
+    "study_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Parent study identifier"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "cohort_definition",
+        "analysis_script",
+        "analysis_output",
+        "study_report",
+        "signed_report",
+        "data_extract",
+        "provenance_record"
+      ],
+      "description": "Artifact type"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Artifact version (monotonically increasing)"
+    },
+    "hash": {
+      "type": "object",
+      "required": ["algorithm", "value"],
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "enum": ["SHA-256"],
+          "description": "Hash algorithm"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "Hex-encoded hash value"
+        }
+      }
+    },
+    "storage": {
+      "type": "object",
+      "properties": {
+        "backend": {
+          "type": "string",
+          "enum": ["s3", "minio", "local"],
+          "description": "Storage backend"
+        },
+        "path": {
+          "type": "string",
+          "description": "Storage path/key"
+        },
+        "worm_locked": {
+          "type": "boolean",
+          "description": "Whether WORM lock is applied"
+        }
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "properties": {
+        "parent_artifact_ids": {
+          "type": "array",
+          "items": { "type": "string", "format": "uuid" },
+          "description": "Artifacts this was derived from"
+        },
+        "tool_used": {
+          "type": "string",
+          "description": "Tool/script that produced this artifact"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameters used to produce this artifact"
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "description": "21 CFR Part 11 electronic signature",
+      "properties": {
+        "signer_id": {
+          "type": "string",
+          "description": "Identity of signer"
+        },
+        "signer_name": {
+          "type": "string",
+          "description": "Full name of signer"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Signing timestamp (ISO 8601)"
+        },
+        "meaning": {
+          "type": "string",
+          "enum": ["authorship", "review", "approval", "responsibility"],
+          "description": "Meaning of signature per 21 CFR Part 11"
+        },
+        "method": {
+          "type": "string",
+          "enum": ["password", "biometric", "two_factor"],
+          "description": "Authentication method"
+        }
+      },
+      "required": ["signer_id", "signer_name", "timestamp", "meaning", "method"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Creation timestamp"
+    },
+    "created_by": {
+      "type": "string",
+      "description": "Actor who created this artifact"
+    },
+    "retention": {
+      "type": "object",
+      "properties": {
+        "policy": {
+          "type": "string",
+          "enum": ["clinical_trial_25y", "research_7y", "operational_3y"]
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata"
+    }
+  }
+}
