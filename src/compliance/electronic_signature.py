@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
 from datetime import datetime, timezone
 from enum import Enum
 from typing import Any
@@ -33,6 +35,7 @@ class MosElectronicSignature(BaseModel):
     signature_id: str = Field(default_factory=lambda: str(uuid4()))
     signer_id: str
     signer_name: str
+    signer_role: str = Field(default="signer", description="Part 11 signer role / title.")
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     meaning: MosSignatureMeaning
     method: MosSignatureMethod
@@ -67,3 +70,9 @@ def mos_validate_signature_payload(mos_sig: MosElectronicSignature) -> dict[str,
         "timestamp": mos_sig.timestamp.isoformat(),
         "phi_safe": True,
     }
+
+
+def mos_build_signature_hash(mos_payload: dict[str, Any]) -> str:
+    """SHA-256 over canonical JSON for non-repudiation binding (audit-safe fields only)."""
+    mos_canon = json.dumps(mos_payload, sort_keys=True, default=str)
+    return hashlib.sha256(mos_canon.encode("utf-8")).hexdigest()

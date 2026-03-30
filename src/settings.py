@@ -24,6 +24,10 @@ class MosSettings(BaseSettings):
     api_port: int = 8000
     fda_config_path: Path = Path("config/fda-compliance.yaml")
     require_tenant_header: bool = False
+    database_url: str = (
+        "postgresql+asyncpg://evidence:evidence@127.0.0.1:5433/evidence"
+    )
+    skip_db: bool = False
 
 
 @lru_cache

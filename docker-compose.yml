@@ -1,4 +1,4 @@
-# Local Temporal + Evidence Store API (backup compose files per org policy)
+# PostgreSQL (Temporal) + PostgreSQL (evidence) + Temporal + UI + API + worker
 services:
   postgresql:
     image: postgres:15-alpine
@@ -15,8 +15,24 @@ services:
       timeout: 5s
       retries: 5
 
+  postgres-evidence:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: evidence
+      POSTGRES_PASSWORD: evidence
+      POSTGRES_DB: evidence
+    ports:
+      - "5433:5432"
+    volumes:
+      - evidence_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U evidence -d evidence"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   temporal:
-    image: temporalio/auto-setup:1.25.2
+    image: temporalio/auto-setup:latest
     depends_on:
       postgresql:
         condition: service_healthy
@@ -30,21 +46,24 @@ services:
       - "7233:7233"
 
   temporal-ui:
-    image: temporalio/ui:2.34.0
+    image: temporalio/ui:latest
     depends_on:
       - temporal
     environment:
       - TEMPORAL_ADDRESS=temporal:7233
       - TEMPORAL_CORS_ORIGINS=http://localhost:3000
     ports:
-      - "8088:8080"
+      - "8233:8080"
 
   evidence-store:
     build:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      - temporal
+      postgres-evidence:
+        condition: service_healthy
+      temporal:
+        condition: service_started
     environment:
       - MOS_SERVICE_NAME=medinovai-evidence-store
       - MOS_TEMPORAL_ADDRESS=temporal:7233
@@ -53,6 +72,7 @@ services:
       - MOS_API_HOST=0.0.0.0
       - MOS_API_PORT=8000
       - MOS_FDA_CONFIG_PATH=/app/config/fda-compliance.yaml
+      - MOS_DATABASE_URL=postgresql+asyncpg://evidence:evidence@postgres-evidence:5432/evidence
     ports:
       - "8000:8000"
     volumes:
@@ -63,16 +83,21 @@ services:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      - temporal
-    command: ["python", "-m", "src.worker"]
+      postgres-evidence:
+        condition: service_healthy
+      temporal:
+        condition: service_started
+    command: ["python", "-m", "src.temporal_worker"]
     environment:
       - MOS_SERVICE_NAME=medinovai-evidence-store
       - MOS_TEMPORAL_ADDRESS=temporal:7233
       - MOS_TEMPORAL_NAMESPACE=default
       - MOS_TASK_QUEUE=evidence-store-tasks
       - MOS_FDA_CONFIG_PATH=/app/config/fda-compliance.yaml
+      - MOS_DATABASE_URL=postgresql+asyncpg://evidence:evidence@postgres-evidence:5432/evidence
     volumes:
       - ./config:/app/config:ro
 
 volumes:
   temporal_pg:
+  evidence_pg:
