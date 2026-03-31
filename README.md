@@ -1,7 +1,18 @@
-# medinovai-evidence-store
+# ARCHIVED - Migrated to Monorepo
 
-Phase F Tier 1 platform service: study lifecycle orchestration (Temporal), artifact lineage, reproducibility bundles, and FDA 21 CFR Part 11 controls (electronic signatures, audit trails, data integrity).
+This repository has been migrated to the MedinovAI monorepo structure.
 
-See `CLAUDE.md` for harness conventions and startup.
+## New Location
+- **Monorepo**: medinovai-clinical-research
+- **Path**: services/evidence-store
+- **Migration Date**: 2026-03-31
+- **Archive Date**: 2026-03-31
 
-Reference schema: `schemas/artifact.json` (aligned with `medinovai-Developer` platform reference).
+## Historical Context
+This repository is preserved for historical reference. All future development
+should occur in the monorepo location listed above.
+
+## Migration Details
+- Pre-migration tag: `pre-monorepo-migration-20260330`
+- Git history: Preserved via git subtree
+- Service manifest: Available in new location
