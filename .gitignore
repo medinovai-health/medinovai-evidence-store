@@ -12,3 +12,6 @@ dist/
 build/
 .DS_Store
 temporal-data/
+
+# jCodemunch local symbol index
+.jcodemunch/
